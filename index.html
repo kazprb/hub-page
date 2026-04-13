@@ -61,6 +61,7 @@
         padding: 20px;
         text-decoration: none;
         color: inherit;
+        cursor: pointer;
         transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
         display: flex;
         flex-direction: column;
@@ -69,6 +70,9 @@
         box-shadow: 0 10px 24px rgba(17, 34, 68, 0.1);
         border-color: #b9c8e3;
         transform: translateY(-3px);
+      }
+      .tool-card:hover .cta {
+        text-decoration: underline;
       }
 
       /* ── Preview ── */
@@ -163,15 +167,15 @@
         transform: translateY(10px) rotate(11deg);
         z-index: 3;
       }
-      .gacha-preview .gp-card.rar-R   { filter: drop-shadow(0 8px 18px rgba(96, 160, 255, 0.5)); }
-      .gacha-preview .gp-card.rar-SR  { filter: drop-shadow(0 10px 20px rgba(80, 220, 140, 0.55)); }
-      .gacha-preview .gp-card.rar-SSR { filter: drop-shadow(0 12px 26px rgba(255, 190, 80, 0.7)); }
+      .gacha-preview .gp-card.rar-R   { filter: drop-shadow(0 6px 14px rgba(96, 160, 255, 0.35)); }
+      .gacha-preview .gp-card.rar-SR  { filter: drop-shadow(0 8px 16px rgba(80, 220, 140, 0.38)); }
+      .gacha-preview .gp-card.rar-SSR { filter: drop-shadow(0 8px 18px rgba(255, 190, 80, 0.45)); }
 
       .gacha-preview .gp-card-inner {
         position: absolute;
         inset: 0;
         transform-style: preserve-3d;
-        animation: gpFlip 6s cubic-bezier(.55,.08,.25,1) infinite;
+        animation: gpFlip 6.5s cubic-bezier(.55,.08,.25,1) infinite;
       }
       .gacha-preview .gp-card:nth-child(1) .gp-card-inner { animation-delay: 0s; }
       .gacha-preview .gp-card:nth-child(2) .gp-card-inner { animation-delay: 0.45s; }
@@ -269,86 +273,59 @@
       .gacha-preview .gp-card.rar-SR  .gp-badge { background: linear-gradient(135deg, #16a34a, #86efac); }
       .gacha-preview .gp-card.rar-SSR .gp-badge { background: linear-gradient(135deg, #f97316, #fde68a); }
 
-      /* Rarity glow */
+      /* Rarity glow (subtle) */
       .gacha-preview .gp-card::before {
         content: "";
         position: absolute;
-        inset: -14px;
+        inset: -10px;
         pointer-events: none;
         border-radius: 50%;
         opacity: 0;
         filter: blur(8px);
-        animation: gpGlow 6s ease-out infinite;
+        animation: gpGlow 6.5s ease-out infinite;
       }
       .gacha-preview .gp-card:nth-child(1)::before { animation-delay: 0s; }
       .gacha-preview .gp-card:nth-child(2)::before { animation-delay: 0.45s; }
       .gacha-preview .gp-card:nth-child(3)::before { animation-delay: 0.9s; }
       .gacha-preview .gp-card.rar-R::before {
-        inset: -10px;
-        background: radial-gradient(circle, rgba(96, 160, 255, 0.55) 0%, rgba(40, 100, 220, 0.18) 40%, transparent 65%);
+        background: radial-gradient(circle, rgba(96, 160, 255, 0.35) 0%, transparent 60%);
       }
       .gacha-preview .gp-card.rar-SR::before {
-        inset: -16px;
-        background: radial-gradient(circle, rgba(100, 240, 150, 0.7) 0%, rgba(30, 160, 90, 0.25) 42%, transparent 68%);
+        inset: -12px;
+        background: radial-gradient(circle, rgba(100, 240, 150, 0.4) 0%, transparent 60%);
       }
       .gacha-preview .gp-card.rar-SSR::before {
-        inset: -24px;
-        background: radial-gradient(circle, rgba(255, 220, 120, 0.9) 0%, rgba(255, 150, 50, 0.5) 30%, rgba(255, 90, 40, 0.2) 55%, transparent 72%);
-        filter: blur(12px);
+        inset: -14px;
+        background: radial-gradient(circle, rgba(255, 220, 120, 0.5) 0%, rgba(255, 150, 50, 0.2) 40%, transparent 65%);
+        filter: blur(10px);
       }
       @keyframes gpGlow {
-        0%, 18%  { opacity: 0; transform: scale(0.55); }
-        22%      { opacity: 1; transform: scale(1.15); }
-        34%      { opacity: 0.85; transform: scale(1.02); }
-        60%      { opacity: 0.55; transform: scale(0.98); }
-        72%      { opacity: 0; transform: scale(0.85); }
-        100%     { opacity: 0; transform: scale(0.55); }
+        0%, 18%  { opacity: 0; transform: scale(0.6); }
+        22%      { opacity: 0.7; transform: scale(1.05); }
+        34%      { opacity: 0.5; transform: scale(1); }
+        60%      { opacity: 0.3; transform: scale(0.98); }
+        72%      { opacity: 0; transform: scale(0.9); }
+        100%     { opacity: 0; transform: scale(0.6); }
       }
 
-      /* SSR shockwave */
-      .gacha-preview .gp-card.rar-SSR::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 30px;
-        height: 30px;
-        margin: -15px 0 0 -15px;
-        border-radius: 50%;
-        border: 2px solid rgba(255, 225, 130, 0.95);
-        box-shadow:
-          0 0 10px rgba(255, 210, 100, 0.85),
-          inset 0 0 8px rgba(255, 220, 120, 0.6);
-        opacity: 0;
-        pointer-events: none;
-        animation: gpShockwave 6s cubic-bezier(.2,.7,.2,1) infinite;
-        animation-delay: 0.9s;
-      }
-      @keyframes gpShockwave {
-        0%, 20%  { opacity: 0; transform: scale(0.35); border-width: 3px; }
-        22%      { opacity: 0.95; transform: scale(0.55); border-width: 2px; }
-        40%      { opacity: 0; transform: scale(3.6); border-width: 1px; }
-        100%     { opacity: 0; transform: scale(3.6); }
-      }
-
-      /* SSR inner shine */
+      /* SSR inner shine (subtle) */
       .gacha-preview .gp-card.rar-SSR .gp-front::before {
         content: "";
         position: absolute;
         inset: 0;
         pointer-events: none;
         background:
-          radial-gradient(circle at 30% 20%, rgba(255, 240, 180, 0.55), transparent 35%),
-          radial-gradient(circle at 75% 70%, rgba(255, 200, 90, 0.4), transparent 40%);
+          radial-gradient(circle at 30% 20%, rgba(255, 240, 180, 0.3), transparent 35%),
+          radial-gradient(circle at 75% 70%, rgba(255, 200, 90, 0.2), transparent 40%);
         mix-blend-mode: screen;
         opacity: 0;
-        animation: gpSsrShine 6s ease-in-out infinite;
+        animation: gpSsrShine 6.5s ease-in-out infinite;
         animation-delay: 0.9s;
       }
       @keyframes gpSsrShine {
         0%, 20%  { opacity: 0; }
-        26%      { opacity: 1; }
-        55%      { opacity: 0.7; }
+        26%      { opacity: 0.6; }
+        55%      { opacity: 0.4; }
         72%      { opacity: 0; }
         100%     { opacity: 0; }
       }
@@ -364,27 +341,17 @@
         position: relative;
         background: #f8f4f0;
       }
-      /* Hint illustration behind panels */
+      /* Illustration behind panels — swap to real image when available */
       .panel-preview .pp-illust {
         position: absolute;
         inset: 0;
         background:
+          url("./images/panel-preview.png") center / cover no-repeat,
           radial-gradient(circle at 35% 40%, #ffe2ec 0%, transparent 50%),
           radial-gradient(circle at 70% 30%, #e0f0ff 0%, transparent 45%),
           radial-gradient(circle at 50% 75%, #fff4d6 0%, transparent 50%),
           radial-gradient(circle at 25% 70%, #e6ffe0 0%, transparent 40%),
           linear-gradient(135deg, #fef6f0 0%, #f0f4fe 100%);
-      }
-      /* Sparkle hints on revealed area */
-      .panel-preview .pp-illust::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background:
-          radial-gradient(circle at 40% 35%, rgba(255,255,255,0.9) 0%, transparent 3%),
-          radial-gradient(circle at 65% 55%, rgba(255,255,255,0.8) 0%, transparent 2.5%),
-          radial-gradient(circle at 30% 70%, rgba(255,255,255,0.7) 0%, transparent 2%),
-          radial-gradient(circle at 75% 25%, rgba(255,255,255,0.6) 0%, transparent 2%);
       }
 
       .panel-preview .pp-grid {
@@ -473,7 +440,6 @@
       @media (prefers-reduced-motion: reduce) {
         .gacha-preview .gp-card-inner { animation: none; transform: rotateY(180deg); }
         .gacha-preview .gp-card::before,
-        .gacha-preview .gp-card::after,
         .gacha-preview .gp-front::before { animation: none; opacity: 0; }
         .panel-preview .pp-cell::before { animation: none; opacity: 0.5; }
         .panel-preview .pp-cell::after { animation: none; }
@@ -543,7 +509,7 @@
           <li>当たり演出で盛り上がる</li>
           <li>景品配布までスムーズ</li>
         </ul>
-        <div class="cta">今すぐ使う →</div>
+        <div class="cta">今すぐガチャを作る →</div>
       </a>
 
       <a class="tool-card" href="./panel-opener/">
@@ -571,7 +537,7 @@
           <li>Xへシェアしやすい</li>
           <li>装飾自由</li>
         </ul>
-        <div class="cta">今すぐ使う →</div>
+        <div class="cta">パネルを作ってみる →</div>
       </a>
 
     </div>
@@ -588,8 +554,6 @@
         "./images/hero-card-2.png",
         "./images/hero-card-3.png",
         "./images/hero-card-4.png",
-        "./images/hero-card-5.gif",
-        "./images/hero-card-6.gif",
       ];
       (function () {
         const fronts = Array.from(document.querySelectorAll(".gp-front"));
