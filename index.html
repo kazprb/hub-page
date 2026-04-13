@@ -373,9 +373,8 @@
         content: "";
         position: absolute;
         inset: 0;
-        border-radius: 4px;
         opacity: 1;
-        animation: ppOpen 10s ease-in-out infinite;
+        transition: opacity 0.5s ease-out;
         z-index: 1;
       }
       /* Label on each panel */
@@ -392,7 +391,12 @@
         letter-spacing: 0.02em;
         z-index: 2;
         opacity: 1;
-        animation: ppLabelFade 10s ease-in-out infinite;
+        transition: opacity 0.5s ease-out;
+      }
+      /* Opened state */
+      .panel-preview .pp-cell.open::before,
+      .panel-preview .pp-cell.open::after {
+        opacity: 0;
       }
 
       /* Panel colors — actual palette from the tool */
@@ -406,43 +410,12 @@
       .panel-preview .pp-cell:nth-child(8)::before { background: #ffdfef; }
       .panel-preview .pp-cell:nth-child(9)::before { background: #ffe9d6; }
 
-      /* Stagger: open center first, then spiral outward */
-      .panel-preview .pp-cell:nth-child(5)::before,
-      .panel-preview .pp-cell:nth-child(5)::after { animation-delay: 0s; }
-      .panel-preview .pp-cell:nth-child(2)::before,
-      .panel-preview .pp-cell:nth-child(2)::after { animation-delay: 0.7s; }
-      .panel-preview .pp-cell:nth-child(6)::before,
-      .panel-preview .pp-cell:nth-child(6)::after { animation-delay: 1.4s; }
-      .panel-preview .pp-cell:nth-child(8)::before,
-      .panel-preview .pp-cell:nth-child(8)::after { animation-delay: 2.1s; }
-      .panel-preview .pp-cell:nth-child(4)::before,
-      .panel-preview .pp-cell:nth-child(4)::after { animation-delay: 2.8s; }
-      .panel-preview .pp-cell:nth-child(1)::before,
-      .panel-preview .pp-cell:nth-child(1)::after { animation-delay: 3.5s; }
-      .panel-preview .pp-cell:nth-child(3)::before,
-      .panel-preview .pp-cell:nth-child(3)::after { animation-delay: 4.2s; }
-      .panel-preview .pp-cell:nth-child(7)::before,
-      .panel-preview .pp-cell:nth-child(7)::after { animation-delay: 4.9s; }
-      .panel-preview .pp-cell:nth-child(9)::before,
-      .panel-preview .pp-cell:nth-child(9)::after { animation-delay: 5.6s; }
-
-      @keyframes ppOpen {
-        0%, 6%    { opacity: 1; }
-        12%, 22%  { opacity: 0; }
-        28%, 100% { opacity: 1; }
-      }
-      @keyframes ppLabelFade {
-        0%, 6%    { opacity: 1; }
-        12%, 22%  { opacity: 0; }
-        28%, 100% { opacity: 1; }
-      }
-
       @media (prefers-reduced-motion: reduce) {
         .gacha-preview .gp-card-inner { animation: none; transform: rotateY(180deg); }
         .gacha-preview .gp-card::before,
         .gacha-preview .gp-front::before { animation: none; opacity: 0; }
-        .panel-preview .pp-cell::before { animation: none; opacity: 0.5; }
-        .panel-preview .pp-cell::after { animation: none; }
+        .panel-preview .pp-cell::before,
+        .panel-preview .pp-cell::after { transition: none; }
       }
 
       /* ── Footer ── */
@@ -583,6 +556,43 @@
         inners.forEach((inner, i) => {
           inner.addEventListener("animationiteration", () => apply(i, pickFor(i)));
         });
+      })();
+
+      // Panel preview: open one by one in random order, then reset
+      (function () {
+        const cells = Array.from(document.querySelectorAll(".pp-cell"));
+        if (!cells.length) return;
+
+        const OPEN_INTERVAL = 800;   // ms between each open
+        const PAUSE_ALL_OPEN = 1800; // ms to hold after all opened
+        const PAUSE_RESET = 800;     // ms to hold after reset before next cycle
+
+        function shuffle(arr) {
+          for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+          }
+          return arr;
+        }
+
+        function cycle() {
+          const order = shuffle([...Array(cells.length).keys()]);
+          let step = 0;
+
+          const iv = setInterval(() => {
+            cells[order[step]].classList.add("open");
+            step++;
+            if (step >= cells.length) {
+              clearInterval(iv);
+              setTimeout(() => {
+                cells.forEach((c) => c.classList.remove("open"));
+                setTimeout(cycle, PAUSE_RESET);
+              }, PAUSE_ALL_OPEN);
+            }
+          }, OPEN_INTERVAL);
+        }
+
+        cycle();
       })();
     </script>
 
