@@ -16,6 +16,9 @@
         --accent: #2f6fd3;
       }
       * { box-sizing: border-box; margin: 0; }
+      html, body {
+        overflow-x: hidden;
+      }
       body {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         background: radial-gradient(circle at top, #ffffff 0%, var(--bg) 48%);
@@ -420,6 +423,11 @@
       .panel-preview .pp-cell:nth-child(9)::before { background: #ffe9d6; }
 
       /* ── Mobile ── */
+      @media (max-width: 640px) {
+        .tools {
+          grid-template-columns: 1fr;
+        }
+      }
       @media (max-width: 520px) {
         .hero {
           padding: 40px 16px 28px;
