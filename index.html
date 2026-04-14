@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <title>HydeyTools</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="HydeyTools — 配信をもっと盛り上げる、配信者向けツールコレクション" />
+    <meta name="description" content="HydeyTools — 配信をもっと盛り上げる、配信者向けツールコレクション"
+      data-ja="HydeyTools — 配信をもっと盛り上げる、配信者向けツールコレクション"
+      data-en="HydeyTools — A collection of practical tools for streamers" />
     <link rel="icon" href="../hydey_favicon.png" type="image/png" />
     <style>
       :root {
@@ -26,6 +28,44 @@
         min-height: 100dvh;
         display: flex;
         flex-direction: column;
+      }
+
+      /* ── Language switch ── */
+      .lang-switch {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 2px;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: 10;
+      }
+      .lang-switch button {
+        appearance: none;
+        background: transparent;
+        border: 0;
+        font: inherit;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--text-sub);
+        padding: 5px 12px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+      }
+      .lang-switch button.active {
+        background: var(--accent);
+        color: #fff;
+      }
+      .lang-switch button:not(.active):hover {
+        color: var(--text-main);
       }
 
       /* ── Hero ── */
@@ -430,7 +470,7 @@
       }
       @media (max-width: 520px) {
         .hero {
-          padding: 40px 16px 28px;
+          padding: 56px 16px 28px;
         }
         .hero img {
           height: 44px;
@@ -464,6 +504,14 @@
         .panel-preview .pp-cell::after {
           font-size: 9px;
         }
+        .lang-switch {
+          top: 12px;
+          right: 12px;
+        }
+        .lang-switch button {
+          font-size: 11px;
+          padding: 4px 10px;
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -492,10 +540,18 @@
   </head>
   <body>
 
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" data-lang="ja" aria-label="日本語">JA</button>
+      <button type="button" data-lang="en" aria-label="English">EN</button>
+    </div>
+
     <div class="hero">
       <img src="../hydeytools-logo.png" alt="HydeyTools" />
-      <p>配信をもっと盛り上げる、実用ツールをまとめました。</p>
-      <p class="sub">IRIAMなどの配信活動におすすめ</p>
+      <p data-ja="配信をもっと盛り上げる、実用ツールをまとめました。"
+         data-en="Practical tools to make your live streams more exciting.">配信をもっと盛り上げる、実用ツールをまとめました。</p>
+      <p class="sub"
+         data-ja="IRIAMなどの配信活動におすすめ"
+         data-en="Great for IRIAM and other live streaming platforms">IRIAMなどの配信活動におすすめ</p>
     </div>
 
     <div class="tools">
@@ -531,15 +587,17 @@
             </div>
           </div>
         </div>
-        <h2>Live Gacha</h2>
-        <p class="desc">リスナー全員で「当たりの瞬間」を見守れるカードゲーム風ガチャ。URL共有だけで配信が盛り上がる。</p>
+        <h2 data-ja="Live Gacha" data-en="Live Gacha">Live Gacha</h2>
+        <p class="desc"
+           data-ja="リスナー全員で「当たりの瞬間」を見守れるカードゲーム風ガチャ。URL共有だけで配信が盛り上がる。"
+           data-en="A card-game-style gacha where everyone watches the winning moment together. Just share a URL to get your stream hyped.">リスナー全員で「当たりの瞬間」を見守れるカードゲーム風ガチャ。URL共有だけで配信が盛り上がる。</p>
         <ul class="benefits">
-          <li>URL共有だけで全員参加</li>
-          <li>当たり演出で盛り上がる</li>
-          <li>景品配布までスムーズ</li>
-          <li>レアリティ演出でガチャ感UP</li>
+          <li data-ja="URL共有だけで全員参加" data-en="Everyone joins with just a shared URL">URL共有だけで全員参加</li>
+          <li data-ja="当たり演出で盛り上がる" data-en="Built-in winning effects for hype moments">当たり演出で盛り上がる</li>
+          <li data-ja="景品配布までスムーズ" data-en="Smooth prize distribution, end to end">景品配布までスムーズ</li>
+          <li data-ja="レアリティ演出でガチャ感UP" data-en="Rarity effects amp up the gacha feel">レアリティ演出でガチャ感UP</li>
         </ul>
-        <div class="cta">今すぐガチャを作る →</div>
+        <div class="cta" data-ja="今すぐガチャを作る →" data-en="Create a gacha now →">今すぐガチャを作る →</div>
       </a>
 
       <a class="tool-card" href="./panel-opener/">
@@ -547,37 +605,91 @@
           <div class="panel-preview" aria-hidden="true">
             <div class="pp-illust"></div>
             <div class="pp-grid">
-              <div class="pp-cell" data-label="パネル1"></div>
-              <div class="pp-cell" data-label="パネル2"></div>
-              <div class="pp-cell" data-label="パネル3"></div>
-              <div class="pp-cell" data-label="パネル4"></div>
-              <div class="pp-cell" data-label="パネル5"></div>
-              <div class="pp-cell" data-label="パネル6"></div>
-              <div class="pp-cell" data-label="パネル7"></div>
-              <div class="pp-cell" data-label="パネル8"></div>
-              <div class="pp-cell" data-label="パネル9"></div>
+              <div class="pp-cell" data-label="パネル1" data-label-ja="パネル1" data-label-en="Panel 1"></div>
+              <div class="pp-cell" data-label="パネル2" data-label-ja="パネル2" data-label-en="Panel 2"></div>
+              <div class="pp-cell" data-label="パネル3" data-label-ja="パネル3" data-label-en="Panel 3"></div>
+              <div class="pp-cell" data-label="パネル4" data-label-ja="パネル4" data-label-en="Panel 4"></div>
+              <div class="pp-cell" data-label="パネル5" data-label-ja="パネル5" data-label-en="Panel 5"></div>
+              <div class="pp-cell" data-label="パネル6" data-label-ja="パネル6" data-label-en="Panel 6"></div>
+              <div class="pp-cell" data-label="パネル7" data-label-ja="パネル7" data-label-en="Panel 7"></div>
+              <div class="pp-cell" data-label="パネル8" data-label-ja="パネル8" data-label-en="Panel 8"></div>
+              <div class="pp-cell" data-label="パネル9" data-label-ja="パネル9" data-label-en="Panel 9"></div>
             </div>
           </div>
         </div>
-        <h2>パネル開けツール</h2>
-        <p class="desc">イラストや企画をワクワクする形でお披露目できるパネルツール。かわいく作ってそのまま使える。</p>
+        <h2 data-ja="パネル開けツール" data-en="Panel Opener">パネル開けツール</h2>
+        <p class="desc"
+           data-ja="イラストや企画をワクワクする形でお披露目できるパネルツール。かわいく作ってそのまま使える。"
+           data-en="Reveal illustrations and announcements in an exciting way. Make something cute and use it right away.">イラストや企画をワクワクする形でお披露目できるパネルツール。かわいく作ってそのまま使える。</p>
         <ul class="benefits">
-          <li>お披露目配信に最適</li>
-          <li>簡単にかわいいパネル作成</li>
-          <li>Xへシェアしやすい</li>
-          <li>装飾自由</li>
+          <li data-ja="お披露目配信に最適" data-en="Perfect for reveal streams">お披露目配信に最適</li>
+          <li data-ja="簡単にかわいいパネル作成" data-en="Easily make cute panels">簡単にかわいいパネル作成</li>
+          <li data-ja="Xへシェアしやすい" data-en="Easy to share on X">Xへシェアしやすい</li>
+          <li data-ja="装飾自由" data-en="Freely customizable">装飾自由</li>
         </ul>
-        <div class="cta">パネルを作ってみる →</div>
+        <div class="cta" data-ja="パネルを作ってみる →" data-en="Try making a panel →">パネルを作ってみる →</div>
       </a>
 
     </div>
 
     <footer>
       &copy; HydeyTools
-      <span class="credit">Created by 青山ハイド</span>
+      <span class="credit" data-ja="Created by 青山ハイド" data-en="Created by Aoyama Hyde">Created by 青山ハイド</span>
     </footer>
 
     <script>
+      // i18n: language switch
+      (function () {
+        const SUPPORTED = ["ja", "en"];
+        const STORAGE_KEY = "hydey-lang";
+
+        function detectInitial() {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (SUPPORTED.includes(saved)) return saved;
+          const nav = (navigator.language || "ja").toLowerCase();
+          return nav.startsWith("ja") ? "ja" : "en";
+        }
+
+        function applyLang(lang) {
+          if (!SUPPORTED.includes(lang)) lang = "ja";
+          document.documentElement.lang = lang;
+
+          // Text nodes with data-ja / data-en
+          document.querySelectorAll("[data-ja][data-en]").forEach((el) => {
+            const txt = el.dataset[lang];
+            if (txt == null) return;
+            if (el.tagName === "META") {
+              el.setAttribute("content", txt);
+            } else {
+              el.textContent = txt;
+            }
+          });
+
+          // Panel labels (data-label drives ::after content)
+          document.querySelectorAll("[data-label-ja][data-label-en]").forEach((el) => {
+            el.setAttribute("data-label", el.dataset["label" + (lang === "ja" ? "Ja" : "En")]);
+          });
+
+          // Title
+          document.title = lang === "ja"
+            ? "HydeyTools — 配信者向けツールコレクション"
+            : "HydeyTools — Tools for streamers";
+
+          // Button active state
+          document.querySelectorAll(".lang-switch button").forEach((btn) => {
+            btn.classList.toggle("active", btn.dataset.lang === lang);
+          });
+
+          localStorage.setItem(STORAGE_KEY, lang);
+        }
+
+        document.querySelectorAll(".lang-switch button").forEach((btn) => {
+          btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+        });
+
+        applyLang(detectInitial());
+      })();
+
       // Gacha preview card image rotation
       const GP_POOL = [
         "./images/hero-card-1.png",
