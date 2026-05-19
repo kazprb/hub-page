@@ -462,6 +462,155 @@
       .panel-preview .pp-cell:nth-child(8)::before { background: #ffdfef; }
       .panel-preview .pp-cell:nth-child(9)::before { background: #ffe9d6; }
 
+      /* ══════════════════════════════════════
+         Pref47 Preview — Japan map fill animation
+         ══════════════════════════════════════ */
+      .pref47-preview {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        background: #181c25;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .pref47-preview .p47-map {
+        position: absolute;
+        inset: 0;
+      }
+      .pref47-preview .p47-main {
+        position: absolute;
+        inset: 0;
+        transform: translate(-2%, 0) rotate(28deg) scale(1.4);
+        transform-origin: center;
+      }
+      .pref47-preview .p47-hokkaido {
+        position: absolute;
+        top: 4%;
+        left: 3%;
+        width: 28%;
+        height: 40%;
+        border: 1px dashed rgba(255, 255, 255, 0.25);
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 4px;
+        box-sizing: border-box;
+      }
+      .pref47-preview .p47-okinawa {
+        position: absolute;
+        bottom: 3%;
+        right: 1.5%;
+        width: 18%;
+        height: 26%;
+        border: 1px dashed rgba(255, 255, 255, 0.25);
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 4px;
+        box-sizing: border-box;
+      }
+      .pref47-preview .p47-main svg,
+      .pref47-preview .p47-hokkaido svg,
+      .pref47-preview .p47-okinawa svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .pref47-preview svg path {
+        fill: #2a3140;
+        stroke: #0c0f15;
+        stroke-width: 1.2;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+        transition: fill 0.4s ease;
+      }
+      .pref47-preview svg path.tier-s  { fill: #93c5fd; }
+      .pref47-preview svg path.tier-m  { fill: #6ee7b7; }
+      .pref47-preview svg path.tier-l  { fill: #fbbf24; }
+      .pref47-preview svg path.tier-xl { fill: #f87171; }
+
+      .pref47-preview .p47-counter {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        font-family: system-ui, sans-serif;
+        font-size: 13px;
+        font-weight: 800;
+        color: rgba(26, 26, 46, 0.55);
+        background: rgba(255, 255, 255, 0.78);
+        padding: 3px 9px;
+        border-radius: 999px;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        letter-spacing: 0.02em;
+        z-index: 2;
+      }
+      .pref47-preview .p47-counter .p47-num {
+        color: var(--accent);
+        font-variant-numeric: tabular-nums;
+        display: inline-block;
+        min-width: 1.6em;
+        text-align: right;
+      }
+
+      /* ══════════════════════════════════════
+         Coming Soon — placeholder card
+         ══════════════════════════════════════ */
+      .tool-card-placeholder {
+        opacity: 0.85;
+        cursor: default;
+      }
+      @media (hover: hover) {
+        .tool-card-placeholder:hover {
+          box-shadow: none;
+          border-color: var(--border);
+          transform: none;
+        }
+      }
+      .tool-card-placeholder:active {
+        transform: none;
+        box-shadow: none;
+      }
+
+      .coming-soon-preview {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 10px;
+        background:
+          radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.7) 0%, transparent 60%),
+          linear-gradient(135deg, #ece6db 0%, #dfe2ec 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+      }
+      .coming-soon-preview .cs-dots {
+        display: flex;
+        gap: 10px;
+      }
+      .coming-soon-preview .cs-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--accent);
+        opacity: 0.4;
+        animation: csDotPulse 1.4s ease-in-out infinite;
+      }
+      .coming-soon-preview .cs-dot:nth-child(2) { animation-delay: 0.18s; }
+      .coming-soon-preview .cs-dot:nth-child(3) { animation-delay: 0.36s; }
+      @keyframes csDotPulse {
+        0%, 60%, 100% { transform: scale(0.7); opacity: 0.35; }
+        30%           { transform: scale(1.15); opacity: 0.95; }
+      }
+      .coming-soon-preview .cs-label {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        color: rgba(26, 26, 46, 0.45);
+      }
+
       /* ── Mobile ── */
       @media (max-width: 640px) {
         .tools {
@@ -504,6 +653,10 @@
         .panel-preview .pp-cell::after {
           font-size: 9px;
         }
+        .pref47-preview .p47-counter {
+          font-size: 12px;
+          padding: 2px 8px;
+        }
         .lang-switch {
           top: 12px;
           right: 12px;
@@ -520,6 +673,8 @@
         .gacha-preview .gp-front::before { animation: none; opacity: 0; }
         .panel-preview .pp-cell::before,
         .panel-preview .pp-cell::after { transition: none; }
+        .pref47-preview svg path { transition: none; }
+        .coming-soon-preview .cs-dot { animation: none; opacity: 0.6; }
       }
 
       /* ── Footer ── */
@@ -535,6 +690,14 @@
         margin-top: 4px;
         font-size: 11px;
         color: #bbb;
+      }
+      footer .credit a {
+        color: inherit;
+        text-decoration: none;
+      }
+      footer .credit a:hover,
+      footer .credit a:focus {
+        text-decoration: none;
       }
     </style>
   </head>
@@ -630,11 +793,49 @@
         <div class="cta" data-ja="パネルを作ってみる →" data-en="Try making a panel →">パネルを作ってみる →</div>
       </a>
 
+      <a class="tool-card" href="https://pref47.hydeylab.com/">
+        <div class="tool-preview-wrap">
+          <div class="pref47-preview" aria-hidden="true">
+            <div class="p47-counter"><span class="p47-num">0</span> <span class="p47-total">/ 47</span></div>
+            <div class="p47-map" data-svg="./images/japan.svg"></div>
+          </div>
+        </div>
+        <h2 data-ja="都道府県カウンター" data-en="Prefecture Counter">都道府県カウンター</h2>
+        <p class="desc"
+           data-ja="リスナーと一緒に47都道府県制覇を目指すリアルタイム共有カウンター。OBS透過素材付きで配信にそのまま乗せられる。"
+           data-en="A real-time shared counter for conquering all 47 prefectures together with your listeners. Comes with OBS-ready transparent overlays.">リスナーと一緒に47都道府県制覇を目指すリアルタイム共有カウンター。OBS透過素材付きで配信にそのまま乗せられる。</p>
+        <ul class="benefits">
+          <li data-ja="URL共有でリアルタイム同期" data-en="Real-time sync via URL sharing">URL共有でリアルタイム同期</li>
+          <li data-ja="OBSブラウザソース対応（透過）" data-en="OBS browser source ready (transparent)">OBSブラウザソース対応（透過）</li>
+          <li data-ja="達成演出（紙吹雪・ファンファーレ）" data-en="Achievement effects (confetti & fanfare)">達成演出（紙吹雪・ファンファーレ）</li>
+          <li data-ja="4段階目標 + Heatmapモード" data-en="4-tier goals + heatmap mode">4段階目標 + Heatmapモード</li>
+        </ul>
+        <div class="cta" data-ja="47県耐久を始める →" data-en="Start a 47-prefecture run →">47県耐久を始める →</div>
+      </a>
+
+      <div class="tool-card tool-card-placeholder" aria-disabled="true">
+        <div class="tool-preview-wrap">
+          <div class="coming-soon-preview" aria-hidden="true">
+            <div class="cs-dots">
+              <div class="cs-dot"></div>
+              <div class="cs-dot"></div>
+              <div class="cs-dot"></div>
+            </div>
+            <div class="cs-label">COMING SOON</div>
+          </div>
+        </div>
+        <h2 data-ja="近日公開" data-en="Coming Soon">近日公開</h2>
+        <p class="desc"
+           data-ja="次の配信者向けツールを準備中。お楽しみに。"
+           data-en="The next streamer tool is in the works. Stay tuned.">次の配信者向けツールを準備中。お楽しみに。</p>
+      </div>
+
     </div>
 
     <footer>
       &copy; HydeyTools
-      <span class="credit" data-ja="Created by 青山ハイド" data-en="Created by Aoyama Hyde">Created by 青山ハイド</span>
+      <span class="credit"><span data-ja="Created by " data-en="Created by ">Created by </span><a href="https://x.com/AoyamaHyde" target="_blank" rel="noopener noreferrer" data-ja="青山ハイド" data-en="Aoyama Hyde">青山ハイド</a></span>
+      <span class="credit">Japan map: <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/japan" target="_blank" rel="noopener noreferrer">@svg-maps/japan</a> by Victor Cazanave (CC BY 4.0)</span>
     </footer>
 
     <script>
@@ -725,6 +926,206 @@
         inners.forEach((inner, i) => {
           inner.addEventListener("animationiteration", () => apply(i, pickFor(i)));
         });
+      })();
+
+      // Pref47 preview: load Japan SVG, split Hokkaido/Okinawa into corner insets,
+      // then animate 47-prefecture fill across all three sub-maps.
+      // Subpath-trim utilities ported from pref47/public/js/japan-map.js.
+      (function () {
+        const wrap = document.querySelector(".pref47-preview .p47-map");
+        const numEl = document.querySelector(".pref47-preview .p47-num");
+        if (!wrap || !wrap.dataset.svg) return;
+
+        const SVG_NS = "http://www.w3.org/2000/svg";
+        const TIER_CLASSES = ["tier-s", "tier-m", "tier-l", "tier-xl"];
+        const STEP = 95;
+        const HOLD_ALL = 1600;
+        const HOLD_RESET = 800;
+
+        function pickTier() {
+          const r = Math.random();
+          if (r < 0.45) return "tier-s";
+          if (r < 0.78) return "tier-m";
+          if (r < 0.94) return "tier-l";
+          return "tier-xl";
+        }
+
+        function shuffle(arr) {
+          for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+          }
+          return arr;
+        }
+
+        function splitSubpaths(d) {
+          const parts = d.match(/[Mm][^Mm]*/g) || [];
+          return parts.map((s) => s.trim()).filter(Boolean);
+        }
+
+        // Split a path's `d` into subpaths, measure each in absolute coords,
+        // let pick() choose which to keep, then rebuild with absolute M starts.
+        function keepSubpaths(path, pick) {
+          const d = path.getAttribute("d");
+          const subs = splitSubpaths(d);
+          if (subs.length <= 1) return;
+          let curX = 0, curY = 0;
+          const measured = subs.map((s, index) => {
+            const cmd = s[0];
+            const nums = s.slice(1).trim().split(/[\s,]+/).filter(Boolean).map(Number);
+            const isAbs = cmd === "M";
+            const startX = isAbs ? nums[0] : curX + nums[0];
+            const startY = isAbs ? nums[1] : curY + nums[1];
+            let x = startX, y = startY;
+            let minX = x, minY = y, maxX = x, maxY = y;
+            for (let k = 2; k + 1 < nums.length; k += 2) {
+              const a = nums[k], b = nums[k + 1];
+              if (isAbs) { x = a; y = b; }
+              else { x += a; y += b; }
+              if (x < minX) minX = x; if (x > maxX) maxX = x;
+              if (y < minY) minY = y; if (y > maxY) maxY = y;
+            }
+            const bb = { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
+            curX = x; curY = y;
+            return { d: s, index, bb, area: bb.width * bb.height, startX, startY };
+          });
+          const kept = pick(measured);
+          if (!kept || !kept.length) return;
+          const numHeadRe = /^[\s,]*(-?\d*\.?\d+(?:e[+-]?\d+)?)[\s,]+(-?\d*\.?\d+(?:e[+-]?\d+)?)/i;
+          const rewritten = kept.map((m) => {
+            if (m.d[0] === "M") return m.d;
+            const body = m.d.slice(1);
+            const head = body.match(numHeadRe);
+            if (!head) return `M ${m.startX},${m.startY}`;
+            return `M ${m.startX},${m.startY} l${body.slice(head[0].length)}`;
+          });
+          path.setAttribute("d", rewritten.join(" "));
+        }
+
+        function trimKeepLargest(path) {
+          keepSubpaths(path, (parts) => {
+            if (!parts.length) return parts;
+            return [parts.reduce((best, cur) => (cur.area > best.area ? cur : best), parts[0])];
+          });
+        }
+
+        function trimFirstSubpath(path) {
+          keepSubpaths(path, (parts) => (parts.length ? [parts[0]] : parts));
+        }
+
+        function trimLargestSubpath(path) {
+          keepSubpaths(path, (parts) => {
+            if (!parts.length) return parts;
+            return [parts.reduce((best, cur) => (cur.d.length > best.d.length ? cur : best), parts[0])];
+          });
+        }
+
+        function refitViewBox(svg, pad) {
+          let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+          svg.querySelectorAll("path").forEach((p) => {
+            let bb;
+            try { bb = p.getBBox(); } catch { return; }
+            if (!bb || (bb.width === 0 && bb.height === 0)) return;
+            minX = Math.min(minX, bb.x);
+            minY = Math.min(minY, bb.y);
+            maxX = Math.max(maxX, bb.x + bb.width);
+            maxY = Math.max(maxY, bb.y + bb.height);
+          });
+          if (!Number.isFinite(minX)) return;
+          svg.setAttribute("viewBox", `${minX - pad} ${minY - pad} ${maxX - minX + pad * 2} ${maxY - minY + pad * 2}`);
+        }
+
+        function createSubmapSvg(paths) {
+          const svg = document.createElementNS(SVG_NS, "svg");
+          svg.setAttribute("xmlns", SVG_NS);
+          paths.forEach((p) => svg.appendChild(p.cloneNode(true)));
+          return svg;
+        }
+
+        fetch(wrap.dataset.svg)
+          .then((r) => r.text())
+          .then((svgText) => {
+            wrap.innerHTML = "";
+            const mainHost = document.createElement("div");
+            mainHost.className = "p47-main";
+            const hokkaidoHost = document.createElement("div");
+            hokkaidoHost.className = "p47-hokkaido";
+            const okinawaHost = document.createElement("div");
+            okinawaHost.className = "p47-okinawa";
+            wrap.appendChild(mainHost);
+            wrap.appendChild(hokkaidoHost);
+            wrap.appendChild(okinawaHost);
+
+            mainHost.innerHTML = svgText;
+            const mainSvg = mainHost.querySelector("svg");
+            if (!mainSvg) return;
+            mainSvg.removeAttribute("width");
+            mainSvg.removeAttribute("height");
+            mainSvg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+
+            // (1) Pull Hokkaido into its own SVG (top-left inset)
+            const hokkaidoPath = mainSvg.querySelector('path[id="hokkaido"]');
+            if (hokkaidoPath) {
+              const hokkaidoSvg = createSubmapSvg([hokkaidoPath]);
+              hokkaidoSvg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+              hokkaidoSvg.setAttribute("viewBox", "300 -4 156 118");
+              hokkaidoHost.appendChild(hokkaidoSvg);
+              hokkaidoPath.remove();
+            } else {
+              hokkaidoHost.style.display = "none";
+            }
+
+            // (2) Pull Okinawa into its own SVG, keep only the main island
+            const okinawaPath = mainSvg.querySelector('path[id="okinawa"]');
+            if (okinawaPath) {
+              const okinawaSvg = createSubmapSvg([okinawaPath]);
+              okinawaSvg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+              okinawaHost.appendChild(okinawaSvg);
+              const newOkinawa = okinawaSvg.querySelector('path[id="okinawa"]');
+              if (newOkinawa) trimKeepLargest(newOkinawa);
+              okinawaPath.remove();
+              refitViewBox(okinawaSvg, 2);
+            } else {
+              okinawaHost.style.display = "none";
+            }
+
+            // (3) Mainland: trim Tokyo to its biggest subpath (本土), then drop
+            // far-flung subpaths from prefectures with distant islands so the
+            // square viewBox stays focused on Honshu+Shikoku+Kyushu.
+            const tokyo = mainSvg.querySelector('path[id="tokyo"]');
+            if (tokyo) trimLargestSubpath(tokyo);
+            ["niigata", "shimane", "nagasaki", "kagoshima"].forEach((slug) => {
+              const p = mainSvg.querySelector(`path[id="${slug}"]`);
+              if (p) trimFirstSubpath(p);
+            });
+            mainSvg.setAttribute("viewBox", "104 106 264 264");
+
+            // Collect every prefecture path across all three SVGs
+            const paths = Array.from(wrap.querySelectorAll("svg path"));
+            if (!paths.length) return;
+
+            function cycle() {
+              const order = shuffle([...Array(paths.length).keys()]);
+              let step = 0;
+              if (numEl) numEl.textContent = "0";
+              const iv = setInterval(() => {
+                paths[order[step]].classList.add(pickTier());
+                step++;
+                if (numEl) numEl.textContent = String(step);
+                if (step >= paths.length) {
+                  clearInterval(iv);
+                  setTimeout(() => {
+                    paths.forEach((p) => p.classList.remove(...TIER_CLASSES));
+                    if (numEl) numEl.textContent = "0";
+                    setTimeout(cycle, HOLD_RESET);
+                  }, HOLD_ALL);
+                }
+              }, STEP);
+            }
+
+            cycle();
+          })
+          .catch(() => {});
       })();
 
       // Panel preview: open one by one in random order, then reset
